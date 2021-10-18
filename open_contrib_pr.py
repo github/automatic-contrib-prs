@@ -84,4 +84,5 @@ if __name__ == "__main__":
             os.system(f"rm -rf {repo_name}")
 
             # rate limit to 20 repos per hour
+            print("Waiting 3 minutes so as not to exceed API limits")
             sleep(180)
