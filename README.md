@@ -54,6 +54,9 @@ jobs:
 ## Scaling for large organizations
 - GitHub Actions workflows have time limits currently set at 72 hours per run. If you are operating on more than 1400 repos or so with this action, it will take several runs to complete.
 
+## Contributions
+We would :heart: contributions to improve this action. Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for how to get involved.
+
 ## Instructions to run locally without Docker
 - Clone the repository or open a codespace
 - Create a personal access token with read only permissions
@@ -62,3 +65,14 @@ jobs:
 - Install dependencies `python3 -m pip install -r requirements.txt`
 - Run the code `python3 open_contrib_pr.py`
 - After running locally this will have changed your git config user.name and user.email so those should be reset for this repository
+
+## Docker debug instructions
+- Install Docker and make sure docker engine is running
+- cd to the repository
+- Edit the Dockerfile to enable interactive docker debug as instructed in the comments of the file
+- `docker build -t test .`
+- `docker run -it test`
+- Now you should be at a command prompt inside your docker container and you can begin debugging
+
+## License
+[MIT](./LICENSE)
