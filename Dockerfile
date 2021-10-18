@@ -1,7 +1,7 @@
 FROM python:3.8-slim-buster
 
 WORKDIR /action/workspace
-COPY requirements.txt CONTRIBUTING-template.md open_contrib_pr.py /action/workspace/
+COPY requirements.txt CONTRIBUTING-template.md open_contrib_pr.py repos.json /action/workspace/
 
 RUN python3 -m pip install --no-cache-dir -r requirements.txt \
     && apt-get -y update \
