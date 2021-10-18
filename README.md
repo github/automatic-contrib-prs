@@ -20,7 +20,7 @@ Note: Your GitHub token will need to have read/write access to all the repositor
 
 ### Example workflow
 ```yaml
-name: InnerSource repository crawler
+name: Find proper repos and open CONTRIBUTING.md prs
 
 on:
   workflow_dispatch:
