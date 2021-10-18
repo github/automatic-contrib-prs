@@ -47,7 +47,7 @@ if __name__ == "__main__":
             os.chdir(f"{repo_name}")
             os.system(f"git checkout -b {BRANCH_NAME}")
             # copy, customize, and git add the template file
-            os.system("cp /action/workspace/CONTRIBUTING-template.md .")
+            os.system("cp /action/workspace/CONTRIBUTING-template.md CONTRIBUTING.md")
             os.system(f"sed -i 's/Project-Name/{repo_name}/g' CONTRIBUTING.md")
             os.system("git add CONTRIBUTING.md")
             # git commit that file
