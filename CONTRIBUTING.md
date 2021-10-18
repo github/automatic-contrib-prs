@@ -13,6 +13,7 @@ All types of contributions are encouraged and valued. See the [Table of Contents
 - [I Want To Contribute](#i-want-to-contribute)
 - [Reporting Bugs](#reporting-bugs)
 - [Suggesting Enhancements](#suggesting-enhancements)
+- [Releases])#releases)
 
 ## I Have a Question
 
@@ -86,3 +87,16 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/github
 - **Describe the current behavior** and **explain which behavior you expected to see instead** and why. At this point you can also tell which alternatives do not work for you.
 - You may want to **include screenshots and animated GIFs** which help you demonstrate the steps or point out the part which the suggestion is related to.
 - **Explain why this enhancement would be useful** to most automatic-contrib-prs users.
+
+## Releases
+To release a new version, maintainers are to release new versions following semantic versioning and via GitHub Releases.
+Once the code is ready to release please do the following
+1. Create a [GitHub release](https://github.com/github/automatic-contrib-prs/releases) based off the current draft and review release notes
+2. Ensure that the versioning is correct given the content of the release
+3. Check the box to release it to the GitHub Marketplace
+4. Publish the release
+5. Clone the repository at the release tag locally or in a codespace
+6. Authenticate to ghcr.io using [these instructions](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#authenticating-to-the-container-registry)
+7. `docker build -t ghcr.io/github/automatic-contrib-prs:v1 .` where v1 is the current major version number
+8. `docker push ghcr.io/github/automatic-contrib-prs:v1` where v1 is the current major version number
+9. Update the `README.md` instructions to point to the new docker container
