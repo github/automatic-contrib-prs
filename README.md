@@ -51,6 +51,9 @@ jobs:
         PR_BODY: ${{ secrets.PR_BODY }}
 ```
 
+## Scaling for large organizations
+- GitHub Actions workflows have time limits currently set at 72 hours per run. If you are operating on more than 1400 repos or so with this action, it will take several runs to complete.
+
 ## Instructions to run locally without Docker
 - Clone the repository or open a codespace
 - Create a personal access token with read only permissions
