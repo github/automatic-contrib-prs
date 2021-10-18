@@ -26,7 +26,7 @@ if __name__ == "__main__":
     token = os.getenv("GH_TOKEN")
     REPOS_JSON_LOCATION = os.getenv("REPOS_JSON_LOCATION")
     os.system(f"git clone https://{gh_actor}:{token}@github.com/{REPOS_JSON_LOCATION}")
-    repos_file = open(REPOS_JSON_LOCATION, "r", encoding="utf-8")
+    repos_file = open(str(REPOS_JSON_LOCATION), "r", encoding="utf-8")
     innersource_repos = json.loads(repos_file.read())
 
     for repo in innersource_repos:
