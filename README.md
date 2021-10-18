@@ -24,8 +24,6 @@ name: Find proper repos and open CONTRIBUTING.md prs
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '00 5 * * *'
 
 jobs:
   build:
