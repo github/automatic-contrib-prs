@@ -1,4 +1,8 @@
 # automatic-contrib-prs
+[![.github/workflows/linter.yml](https://github.com/github/automatic-contrib-prs/actions/workflows/linter.yml/badge.svg)](https://github.com/github/automatic-contrib-prs/actions/workflows/linter.yml)
+[![CodeQL](https://github.com/github/automatic-contrib-prs/actions/workflows/codeql.yml/badge.svg)](https://github.com/github/automatic-contrib-prs/actions/workflows/codeql.yml)
+[![Docker Image CI](https://github.com/github/automatic-contrib-prs/actions/workflows/docker-image.yml/badge.svg)](https://github.com/github/automatic-contrib-prs/actions/workflows/docker-image.yml)
+
 Automatically open a pull request for repositories that have no `CONTRIBUTING.md` file for a targeted set of repositories.
 
 ## What this repository does
