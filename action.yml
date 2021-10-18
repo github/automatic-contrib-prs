@@ -1,0 +1,10 @@
+---
+name: 'Automatic Contrib PRs'
+author: 'github'
+description: 'A GitHub Action that opens pull requests in the repositories that have a specified repository topic and also don't have a CONTRIBUTING.md file.'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+branding:
+  icon: 'check-square'
+  color: 'white'
