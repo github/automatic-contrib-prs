@@ -57,5 +57,5 @@ jobs:
 - Copy the `.env-example` file to `.env`
 - Edit the `.env` file by adding your Personal Access Token to it and the desired organization, pull request title and body, and actor (GitHub username)
 - Install dependencies `python3 -m pip install -r requirements.txt`
-- Run the code `python3 open-contrib-pr.py`
+- Run the code `python3 open_contrib_pr.py`
 - After running locally this will have changed your git config user.name and user.email so those should be reset for this repository
