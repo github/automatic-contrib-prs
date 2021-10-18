@@ -83,5 +83,5 @@ if __name__ == "__main__":
             os.chdir("../")
             os.system(f"rm -rf {repo_name}")
 
-            # rate limit to 20 repos per hours
+            # rate limit to 20 repos per hour
             sleep(180)
