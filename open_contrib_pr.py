@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+""" Automatically open a pull request for repositories that have no CONTRIBUTING.md file """
 
 import json
 import os
@@ -22,12 +23,10 @@ if __name__ == "__main__":
     # Get innersource repos from organization
     organization = os.getenv("ORGANIZATION")
     gh_actor = os.getenv("GH_ACTOR")
-    REPOS_JSON_LOCATION = os.getenv("REPOS_JSON_LOCATION")
-    os.system(
-        "git clone https://%s:%s@github.com/%s"
-        % (gh_actor, os.getenv("GH_TOKEN"), REPOS_JSON_LOCATION)
-    )
-    repos_file = open(REPOS_JSON_LOCATION, "r")
+    token = os.getenv("GH_TOKEN")
+    REPOS_JSON_LOCATION = "repos.json"
+    os.system(f"git clone https://{gh_actor}:{token}@github.com/{REPOS_JSON_LOCATION}")
+    repos_file = open(str(REPOS_JSON_LOCATION), "r", encoding="utf-8")
     innersource_repos = json.loads(repos_file.read())
 
     for repo in innersource_repos:
@@ -38,34 +37,36 @@ if __name__ == "__main__":
                 continue
         except KeyError:
             # clone the repo
+            repo_full_name = repo["full_name"]
+            repo_name = repo["name"]
             os.system(
-                "git clone https://%s:%s@github.com/%s"
-                % (gh_actor, os.getenv("GH_TOKEN"), repo["full_name"])
+                f"git clone https://{gh_actor}:{token}@github.com/{repo_full_name}"
             )
             # checkout a branch called contributing-doc
-            os.chdir("%s" % repo["name"])
-            os.system("git checkout -b contributing-doc")
+            BRANCH_NAME = "contributing-doc"
+            os.chdir(f"{repo_name}")
+            os.system(f"git checkout -b {BRANCH_NAME}")
             # copy, customize, and git add the template file
-            os.system("cp ../CONTRIBUTING.md .")
-            os.system("sed -i 's/Project-Name/%s/g' CONTRIBUTING.md" %
-                      repo["name"])
+            os.system("cp /action/workspace/CONTRIBUTING-template.md CONTRIBUTING.md")
+            os.system(f"sed -i 's/Project-Name/{repo_name}/g' CONTRIBUTING.md")
             os.system("git add CONTRIBUTING.md")
             # git commit that file
             os.system(
-                "git commit -m'Request to add a document outling how to contribute'")
-            # git push -u origin code-scanning
-            os.system("git push -u origin contributing-doc")
+                "git commit -m'Request to add a document outlining how to contribute'"
+            )
+            # git push the branch
+            os.system(f"git push -u origin {BRANCH_NAME}")
             # open a PR from that branch to the default branch
             default_branch = repo["default_branch"]
             PR_TITLE = os.getenv("PR_TITLE")
             PR_BODY = os.getenv("PR_BODY")
             # create the pull request
-            repository_object = gh.repository(organization, repo["name"])
+            repository_object = gh.repository(organization, repo_name)
             try:
                 repository_object.create_pull(
                     title=PR_TITLE,
                     body=PR_BODY,
-                    head="contributing-doc",
+                    head=BRANCH_NAME,
                     base=default_branch,
                 )
             except github3.exceptions.UnprocessableEntity:
@@ -80,7 +81,8 @@ if __name__ == "__main__":
                 print(e)
             # Clean up repository dir
             os.chdir("../")
-            os.system("rm -rf %s" % repo["name"])
+            os.system(f"rm -rf {repo_name}")
 
             # rate limit to 20 repos per hour
+            print("Waiting 3 minutes so as not to exceed API limits")
             sleep(180)

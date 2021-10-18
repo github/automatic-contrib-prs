@@ -1,0 +1,10 @@
+---
+name: 'Automatic Contrib PRs'
+author: 'github'
+description: 'A GitHub Action that opens adds CONTRIBUTING.md file in repositories that dont have them.'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+branding:
+  icon: 'github'
+  color: 'black'

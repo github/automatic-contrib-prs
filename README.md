@@ -1,7 +1,7 @@
 # automatic-contrib-prs
 Automatically open a pull request for repositories that have no `CONTRIBUTING.md` file for a targeted set of repositories.
 
-## What this repo does
+## What this repository does
 This code is for a GitHub Action that opens pull requests in the repositories that have a specified repository topic and also don't have a `CONTRIBUTING.md` file.
 
 ## Why would someone do this
@@ -20,12 +20,10 @@ Note: Your GitHub token will need to have read/write access to all the repositor
 
 ### Example workflow
 ```yaml
-name: InnerSource repo crawler
+name: Find proper repos and open CONTRIBUTING.md prs
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '00 5 * * *'
 
 jobs:
   build:
@@ -36,14 +34,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
     
-    - name: Find OSS repos in organization
+    - name: Find OSS repository in organization
       uses: docker://ghcr.io/zkoppert/innersource-crawler:v1
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
         ORGANIZATION: ${{ secrets.ORGANIZATION }}
         TOPIC: open-source
 
-    - name: Open pull requests in OSS repos that are missing contrib files
+    - name: Open pull requests in OSS repository that are missing contrib files
       uses: docker://ghcr.io/github/automatic-contrib-prs:v1
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -53,11 +51,14 @@ jobs:
         PR_BODY: ${{ secrets.PR_BODY }}
 ```
 
+## Scaling for large organizations
+- GitHub Actions workflows have time limits currently set at 72 hours per run. If you are operating on more than 1400 repos or so with this action, it will take several runs to complete.
+
 ## Instructions to run locally without Docker
 - Clone the repository or open a codespace
 - Create a personal access token with read only permissions
 - Copy the `.env-example` file to `.env`
-- Edit the `.env` file by adding your Personal Access Token to it and the desired organization, pull request title and body, and actor (github username)
+- Edit the `.env` file by adding your Personal Access Token to it and the desired organization, pull request title and body, and actor (GitHub username)
 - Install dependencies `python3 -m pip install -r requirements.txt`
-- Run the code `python3 open-contrib-pr.py`
-- After running locally this will have changed your git config user.name and user.email so those should be reset for this repo
+- Run the code `python3 open_contrib_pr.py`
+- After running locally this will have changed your git config user.name and user.email so those should be reset for this repository

@@ -1,6 +1,6 @@
 <!-- markdownlint-disable MD013 -->
 <!-- omit in toc -->
-# Contributing to automatic-contrib-prs
+# Contributing to Project-Name
 
 First off, thanks for taking the time to contribute! :heart:
 
@@ -13,15 +13,14 @@ All types of contributions are encouraged and valued. See the [Table of Contents
 - [I Want To Contribute](#i-want-to-contribute)
 - [Reporting Bugs](#reporting-bugs)
 - [Suggesting Enhancements](#suggesting-enhancements)
-- [Releases](#releases)
 
 ## I Have a Question
 
-Before you ask a question, it is best to search for existing [Issues](https://github.com/github/automatic-contrib-prs/issues) that might help you. In case you have found a suitable issue and still need clarification, you can write your question in this issue.
+Before you ask a question, it is best to search for existing [Issues](https://github.com/github/Project-Name/issues) that might help you. In case you have found a suitable issue and still need clarification, you can write your question in this issue.
 
 If you then still feel the need to ask a question and need clarification, we recommend the following:
 
-- Open an [Issue](https://github.com/github/automatic-contrib-prs/issues/new).
+- Open an [Issue](https://github.com/github/Project-Name/issues/new).
 - Provide as much context as you can about what you're running into.
 - Provide project and platform versions (nodejs, npm, etc), depending on what seems relevant.
 
@@ -41,7 +40,7 @@ A good bug report shouldn't leave others needing to chase you up for more inform
 
 - Make sure that you are using the latest version.
 - Determine if your bug is really a bug and not an error on your side e.g. using incompatible environment components/versions (Make sure that you have read the documentation. If you are looking for support, you might want to check [this section](#i-have-a-question)).
-- To see if other users have experienced (and potentially already solved) the same issue you are having, check if there is not already a bug report existing for your bug or error in the [bug tracker](https://github.com/github/automatic-contrib-prs/issues).
+- To see if other users have experienced (and potentially already solved) the same issue you are having, check if there is not already a bug report existing for your bug or error in the [bug tracker](https://github.com/github/Project-Name/issues).
 - Collect information about the bug:
   - Stack trace (Traceback)
   - OS, Platform and Version (Windows, Linux, macOS, x86, ARM)
@@ -54,7 +53,7 @@ A good bug report shouldn't leave others needing to chase you up for more inform
 
 We use GitHub issues to track bugs and errors. If you run into an issue with the project:
 
-- Open an [Issue](https://github.com/github/automatic-contrib-prs/issues/new). (Since we can't be sure at this point whether it is a bug or not, we ask you not to talk about a bug yet and not to label the issue.)
+- Open an [Issue](https://github.com/github/Project-Name/issues/new). (Since we can't be sure at this point whether it is a bug or not, we ask you not to talk about a bug yet and not to label the issue.)
 - Explain the behavior you would expect and the actual behavior.
 - Please provide as much context as possible and describe the *reproduction steps* that someone else can follow to recreate the issue on their own. This usually includes your code. For good bug reports you should isolate the problem and create a reduced test case.
 - Provide the information you collected in the previous section.
@@ -67,36 +66,23 @@ Once it's filed:
 
 ## Suggesting Enhancements
 
-This section guides you through submitting an enhancement suggestion for automatic-contrib-prs, **including completely new features and minor improvements to existing functionality**. Following these guidelines will help maintainers and the community to understand your suggestion and find related suggestions.
+This section guides you through submitting an enhancement suggestion for Project-Name, **including completely new features and minor improvements to existing functionality**. Following these guidelines will help maintainers and the community to understand your suggestion and find related suggestions.
 
 <!-- omit in toc -->
 ### Before Submitting an Enhancement
 
 - Make sure that you are using the latest version.
 - Read the documentation carefully and find out if the functionality is already covered, maybe by an individual configuration.
-- Perform a [search](https://github.com/github/automatic-contrib-prs/issues) to see if the enhancement has already been suggested. If it has, add a comment to the existing issue instead of opening a new one.
+- Perform a [search](https://github.com/github/Project-Name/issues) to see if the enhancement has already been suggested. If it has, add a comment to the existing issue instead of opening a new one.
 - Find out whether your idea fits with the scope and aims of the project. It's up to you to make a strong case to convince the project's developers of the merits of this feature or to develop the feature yourself and contribute it to the project.
 
 <!-- omit in toc -->
 ### How Do I Submit a Good Enhancement Suggestion?
 
-Enhancement suggestions are tracked as [GitHub issues](https://github.com/github/automatic-contrib-prs/issues).
+Enhancement suggestions are tracked as [GitHub issues](https://github.com/github/Project-Name/issues).
 
 - Use a **clear and descriptive title** for the issue to identify the suggestion.
 - Provide a **step-by-step description of the suggested enhancement** in as many details as possible.
 - **Describe the current behavior** and **explain which behavior you expected to see instead** and why. At this point you can also tell which alternatives do not work for you.
 - You may want to **include screenshots and animated GIFs** which help you demonstrate the steps or point out the part which the suggestion is related to.
-- **Explain why this enhancement would be useful** to most automatic-contrib-prs users.
-
-## Releases
-To release a new version, maintainers are to release new versions following semantic versioning and via GitHub Releases.
-Once the code is ready to release please do the following
-1. Create a [GitHub release](https://github.com/github/automatic-contrib-prs/releases) based off the current draft and review release notes
-2. Ensure that the versioning is correct given the content of the release
-3. Check the box to release it to the GitHub Marketplace
-4. Publish the release
-5. Clone the repository at the release tag locally or in a codespace
-6. Authenticate to ghcr.io using [these instructions](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#authenticating-to-the-container-registry)
-7. `docker build -t ghcr.io/github/automatic-contrib-prs:v1 .` where v1 is the current major version number
-8. `docker push ghcr.io/github/automatic-contrib-prs:v1` where v1 is the current major version number
-9. Update the `README.md` instructions to point to the new docker container
+- **Explain why this enhancement would be useful** to most Project-Name users.
