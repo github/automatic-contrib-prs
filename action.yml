@@ -6,5 +6,5 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
 branding:
-  icon: 'github'
+  icon: 'book'
   color: 'black'
