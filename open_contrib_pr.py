@@ -10,7 +10,6 @@ import github3
 from dotenv import load_dotenv
 
 if __name__ == "__main__":
-
     # Load env variables from file
     dotenv_path = join(dirname(__file__), ".env")
     load_dotenv(dotenv_path)
