@@ -1,6 +1,6 @@
 # automatic-contrib-prs
 
-[![.github/workflows/linter.yml](https://github.com/github/automatic-contrib-prs/actions/workflows/linter.yml/badge.svg)](https://github.com/github/automatic-contrib-prs/actions/workflows/linter.yml)
+[![.github/workflows/linter.yml](https://github.com/github/automatic-contrib-prs/actions/workflows/super-linter.yml/badge.svg)](https://github.com/github/automatic-contrib-prs/actions/workflows/super-linter.yml)
 [![CodeQL](https://github.com/github/automatic-contrib-prs/actions/workflows/codeql.yml/badge.svg)](https://github.com/github/automatic-contrib-prs/actions/workflows/codeql.yml)
 [![Docker Image CI](https://github.com/github/automatic-contrib-prs/actions/workflows/docker-image.yml/badge.svg)](https://github.com/github/automatic-contrib-prs/actions/workflows/docker-image.yml)
 
