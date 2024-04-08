@@ -88,7 +88,7 @@ jobs:
         TOPIC: open-source
 
     - name: Open pull requests in OSS repository that are missing contrib files
-      uses: docker://ghcr.io/github/automatic-contrib-prs:v1
+      uses: docker://ghcr.io/github/automatic-contrib-prs:v2
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
         ORGANIZATION: ${{ secrets.ORGANIZATION }}
