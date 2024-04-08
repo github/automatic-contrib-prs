@@ -3,30 +3,37 @@
 
 import json
 import os
-from os.path import dirname, join
 from time import sleep
 
+import auth
+import env
 import github3
-from dotenv import load_dotenv
 
 if __name__ == "__main__":
-    # Load env variables from file
-    dotenv_path = join(dirname(__file__), ".env")
-    load_dotenv(dotenv_path)
+    env_vars = env.get_env_vars()
+    gh_actor = env_vars.gh_actor
+    organization = env_vars.organization
+    pr_body = env_vars.pr_body
+    pr_title = env_vars.pr_title
+    repos_json_location = env_vars.repos_json_location
+    token = env_vars.gh_token
 
-    # Auth and identitiy to GitHub.com
-    gh = github3.login(token=os.getenv("GH_TOKEN"))
+    # Auth to GitHub.com
+    github_connection = auth.auth_to_github(
+        env_vars.gh_app_id,
+        env_vars.gh_app_installation_id,
+        env_vars.gh_app_private_key_bytes,
+        env_vars.gh_enterprise_url,
+        token,
+    )
+
     os.system("git config --global user.name 'GitHub Actions'")
     os.system("git config --global user.email 'no-reply@github.com'")
 
     # Get innersource repos from organization
-    organization = os.getenv("ORGANIZATION")
-    gh_actor = os.getenv("GH_ACTOR")
-    token = os.getenv("GH_TOKEN")
-    REPOS_JSON_LOCATION = "repos.json"
-    os.system(f"git clone https://{gh_actor}:{token}@github.com/{REPOS_JSON_LOCATION}")
-    repos_file = open(str(REPOS_JSON_LOCATION), "r", encoding="utf-8")
-    innersource_repos = json.loads(repos_file.read())
+    os.system(f"git clone https://{gh_actor}:{token}@github.com/{repos_json_location}")
+    with open(str(repos_json_location), "r", encoding="utf-8") as repos_file:
+        innersource_repos = json.loads(repos_file.read())
 
     for repo in innersource_repos:
         print(repo["name"])
@@ -57,14 +64,12 @@ if __name__ == "__main__":
             os.system(f"git push -u origin {BRANCH_NAME}")
             # open a PR from that branch to the default branch
             default_branch = repo["default_branch"]
-            PR_TITLE = os.getenv("PR_TITLE")
-            PR_BODY = os.getenv("PR_BODY")
             # create the pull request
-            repository_object = gh.repository(organization, repo_name)
+            repository_object = github_connection.repository(organization, repo_name)
             try:
                 repository_object.create_pull(
-                    title=PR_TITLE,
-                    body=PR_BODY,
+                    title=pr_title,
+                    body=pr_body,
                     head=BRANCH_NAME,
                     base=default_branch,
                 )
@@ -76,7 +81,7 @@ if __name__ == "__main__":
                 print("Pull request failed")
             except github3.exceptions.ConnectionError:
                 print("Pull request failed")
-            except Exception as e:
+            except Exception as e:  # pylint: disable=broad-exception-caught
                 print(e)
             # Clean up repository dir
             os.chdir("../")
