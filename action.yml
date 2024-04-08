@@ -4,7 +4,7 @@ author: 'github'
 description: 'A GitHub Action that opens adds CONTRIBUTING.md file in repositories that dont have them.'
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/github/automatic-contrib-prs:v1'
+  image: 'docker://ghcr.io/github/automatic-contrib-prs:v2'
 branding:
   icon: 'book'
   color: 'black'
