@@ -131,9 +131,9 @@ class TestEnv(unittest.TestCase):
     @patch.dict(os.environ, {})
     def test_get_env_vars_missing_all_authentication(self):
         """Test that an error is raised if required authentication environment variables are not set"""
-        with self.assertRaises(ValueError) as cm:
+        with self.assertRaises(ValueError) as context_manager:
             get_env_vars()
-        the_exception = cm.exception
+        the_exception = context_manager.exception
         self.assertEqual(
             str(the_exception),
             "GH_TOKEN environment variable not set",
@@ -147,9 +147,9 @@ class TestEnv(unittest.TestCase):
     )
     def test_get_env_vars_missing_organization(self):
         """Test that an error is raised if required organization environment variables is not set"""
-        with self.assertRaises(ValueError) as cm:
+        with self.assertRaises(ValueError) as context_manager:
             get_env_vars()
-        the_exception = cm.exception
+        the_exception = context_manager.exception
         self.assertEqual(
             str(the_exception),
             "ORGANIZATION environment variable not set",

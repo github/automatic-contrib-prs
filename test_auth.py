@@ -37,9 +37,9 @@ class TestAuthToGitHub(unittest.TestCase):
         Test the auth_to_github function when the token is not provided.
         Expect a ValueError to be raised.
         """
-        with self.assertRaises(ValueError) as cm:
+        with self.assertRaises(ValueError) as context_manager:
             auth.auth_to_github("", "", b"", "", "")
-        the_exception = cm.exception
+        the_exception = context_manager.exception
         self.assertEqual(
             str(the_exception),
             "GH_TOKEN or the set of [GH_APP_ID, GH_APP_INSTALLATION_ID, GH_APP_PRIVATE_KEY] environment variables are not set",
