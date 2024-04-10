@@ -10,6 +10,14 @@ Automatically open a pull request for repositories that have no `CONTRIBUTING.md
 
 This code is for a GitHub Action that opens pull requests in the repositories that have a specified repository topic and also don't have a `CONTRIBUTING.md` file.
 
+## Support
+
+If you need support using this project or have questions about it, please [open up an issue in this repository](https://github.com/github/automatic-contrib-prs/issues). Requests made directly to GitHub staff or support team will be redirected here to open an issue. GitHub SLA's and support/services contracts do not apply to this repository.
+
+### OSPO GitHub Actions as a Whole
+
+All feedback regarding our GitHub Actions, as a whole, should be communicated through [issues on our github-ospo repository](https://github.com/github/github-ospo/issues/new).
+
 ## Why would someone do this
 
 It is desirable, for example, for all Open Source and InnerSource projects to have a `CONTRIBUTING.md` file that specifies for new contributors what the processes and procedures are for making a new contribution. This has been done in some large GitHub customers organizations.
