@@ -3,6 +3,7 @@
 [![.github/workflows/linter.yml](https://github.com/github/automatic-contrib-prs/actions/workflows/super-linter.yml/badge.svg)](https://github.com/github/automatic-contrib-prs/actions/workflows/super-linter.yml)
 [![CodeQL](https://github.com/github/automatic-contrib-prs/actions/workflows/codeql.yml/badge.svg)](https://github.com/github/automatic-contrib-prs/actions/workflows/codeql.yml)
 [![Docker Image CI](https://github.com/github/automatic-contrib-prs/actions/workflows/docker-image.yml/badge.svg)](https://github.com/github/automatic-contrib-prs/actions/workflows/docker-image.yml)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/github/automatic-contrib-prs/badge)](https://scorecard.dev/viewer/?uri=github.com/github/automatic-contrib-prs)
 
 Automatically open a pull request for repositories that have no `CONTRIBUTING.md` file for a targeted set of repositories.
 
