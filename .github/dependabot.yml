@@ -1,4 +1,4 @@
-
+---
 version: 2
 updates:
   - package-ecosystem: "pip"
@@ -7,15 +7,33 @@ updates:
       interval: "daily"
     commit-message:
       prefix: "chore(deps)"
+    groups:
+      dependencies:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
     commit-message:
       prefix: "chore(deps)"
+    groups:
+      dependencies:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
       interval: "daily"
     commit-message:
       prefix: "chore(deps)"
+    groups:
+      dependencies:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
