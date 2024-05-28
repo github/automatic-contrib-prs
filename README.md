@@ -1,7 +1,7 @@
 # automatic-contrib-prs
 
 [![.github/workflows/linter.yml](https://github.com/github/automatic-contrib-prs/actions/workflows/super-linter.yml/badge.svg)](https://github.com/github/automatic-contrib-prs/actions/workflows/super-linter.yml)
-[![CodeQL](https://github.com/github/automatic-contrib-prs/actions/workflows/codeql.yml/badge.svg)](https://github.com/github/automatic-contrib-prs/actions/workflows/codeql.yml)
+[![CodeQL](https://github.com/github/automatic-contrib-prs/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/github/automatic-contrib-prs/actions/workflows/github-code-scanning/codeql)
 [![Docker Image CI](https://github.com/github/automatic-contrib-prs/actions/workflows/docker-image.yml/badge.svg)](https://github.com/github/automatic-contrib-prs/actions/workflows/docker-image.yml)
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/github/automatic-contrib-prs/badge)](https://scorecard.dev/viewer/?uri=github.com/github/automatic-contrib-prs)
 
