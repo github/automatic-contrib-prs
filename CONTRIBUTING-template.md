@@ -1,5 +1,6 @@
 <!-- markdownlint-disable MD013 -->
 <!-- omit in toc -->
+
 # Contributing to Project-Name
 
 First off, thanks for taking the time to contribute! :heart:
@@ -7,6 +8,7 @@ First off, thanks for taking the time to contribute! :heart:
 All types of contributions are encouraged and valued. See the [Table of Contents](#table-of-contents) for different ways to help and details about how this project handles them. Please make sure to read the relevant section before making your contribution. It will make it a lot easier for us project owners and smooth out the experience for all involved. The team looks forward to your contributions. :tada:
 
 <!-- omit in toc -->
+
 ## Table of Contents
 
 - [I Have a Question](#i-have-a-question)
@@ -35,6 +37,7 @@ We will then take care of the issue as soon as possible.
 ## Reporting Bugs
 
 <!-- omit in toc -->
+
 ### Before Submitting a Bug Report
 
 A good bug report shouldn't leave others needing to chase you up for more information. Therefore, we ask you to investigate carefully, collect information and describe the issue in detail in your report. Please complete the following steps in advance to help us fix any potential bug as fast as possible.
@@ -50,13 +53,14 @@ A good bug report shouldn't leave others needing to chase you up for more inform
 - Can you reliably reproduce the issue? And can you also reproduce it with older versions?
 
 <!-- omit in toc -->
+
 ### How Do I Submit a Good Bug Report?
 
 We use GitHub issues to track bugs and errors. If you run into an issue with the project:
 
 - Open an [Issue](https://github.com/github/Project-Name/issues/new). (Since we can't be sure at this point whether it is a bug or not, we ask you not to talk about a bug yet and not to label the issue.)
 - Explain the behavior you would expect and the actual behavior.
-- Please provide as much context as possible and describe the *reproduction steps* that someone else can follow to recreate the issue on their own. This usually includes your code. For good bug reports you should isolate the problem and create a reduced test case.
+- Please provide as much context as possible and describe the _reproduction steps_ that someone else can follow to recreate the issue on their own. This usually includes your code. For good bug reports you should isolate the problem and create a reduced test case.
 - Provide the information you collected in the previous section.
 
 Once it's filed:
@@ -70,6 +74,7 @@ Once it's filed:
 This section guides you through submitting an enhancement suggestion for Project-Name, **including completely new features and minor improvements to existing functionality**. Following these guidelines will help maintainers and the community to understand your suggestion and find related suggestions.
 
 <!-- omit in toc -->
+
 ### Before Submitting an Enhancement
 
 - Make sure that you are using the latest version.
@@ -78,6 +83,7 @@ This section guides you through submitting an enhancement suggestion for Project
 - Find out whether your idea fits with the scope and aims of the project. It's up to you to make a strong case to convince the project's developers of the merits of this feature or to develop the feature yourself and contribute it to the project.
 
 <!-- omit in toc -->
+
 ### How Do I Submit a Good Enhancement Suggestion?
 
 Enhancement suggestions are tracked as [GitHub issues](https://github.com/github/Project-Name/issues).

@@ -32,7 +32,7 @@ It is desirable, for example, for all Open Source and InnerSource projects to ha
 
 1. Create a repository to host this GitHub Action or select an existing repository.
 1. Create the env values from the sample workflow below (GH_TOKEN, GH_ACTOR, PR_TITLE, PR_BODY, and ORGANIZATION) with your information as repository secrets. More info on creating secrets can be found [here](https://docs.github.com/en/actions/security-guides/encrypted-secrets).
-Note: Your GitHub token will need to have read/write access to all the repositories in the `repos.json` file.
+   Note: Your GitHub token will need to have read/write access to all the repositories in the `repos.json` file.
 1. Copy the below example workflow to your repository and put it in the `.github/workflows/` directory with the file extension `.yml` (ie. `.github/workflows/auto-contrib-file.yml`)
 
 ### Configuration
@@ -45,26 +45,26 @@ This action can be configured to authenticate with GitHub App Installation or Pe
 
 ##### GitHub App Installation
 
-| field                         | required | default | description |
-|-------------------------------|----------|---------|-------------|
-| `GH_APP_ID`                   | True     | `""`    | GitHub Application ID. See [documentation](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/about-authentication-with-a-github-app) for more details. |
-| `GH_APP_INSTALLATION_ID`      | True     | `""`    | GitHub Application Installation ID. See [documentation](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/about-authentication-with-a-github-app) for more details. |
-| `GH_APP_PRIVATE_KEY`          | True     | `""`    | GitHub Application Private Key. See [documentation](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/about-authentication-with-a-github-app) for more details. |
+| field                    | required | default | description                                                                                                                                                                                             |
+| ------------------------ | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GH_APP_ID`              | True     | `""`    | GitHub Application ID. See [documentation](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/about-authentication-with-a-github-app) for more details.              |
+| `GH_APP_INSTALLATION_ID` | True     | `""`    | GitHub Application Installation ID. See [documentation](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/about-authentication-with-a-github-app) for more details. |
+| `GH_APP_PRIVATE_KEY`     | True     | `""`    | GitHub Application Private Key. See [documentation](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/about-authentication-with-a-github-app) for more details.     |
 
 ##### Personal Access Token (PAT)
 
-| field                         | required | default | description |
-|-------------------------------|----------|---------|-------------|
-| `GH_TOKEN`                    | True     | `""`    | The GitHub Token used to scan the repository. Must have read access to all repository you are interested in scanning. |
+| field      | required | default | description                                                                                                           |
+| ---------- | -------- | ------- | --------------------------------------------------------------------------------------------------------------------- |
+| `GH_TOKEN` | True     | `""`    | The GitHub Token used to scan the repository. Must have read access to all repository you are interested in scanning. |
 
 #### Other Configuration Options
 
-| field                 | required | default | description |
-|-----------------------|----------|---------|-------------|
-| `GH_ENTERPRISE_URL`   | False    |   ""    | The `GH_ENTERPRISE_URL` is used to connect to an enterprise server instance of GitHub. github.com users should not enter anything here. |
-| `PR_TITLE`            | False    | "Enable Dependabot" | The title of the issue or pull request that will be created if dependabot could be enabled. |
-| `PR_BODY`             | False    | **Pull Request:** "Dependabot could be enabled for this repository. Please enable it by merging this pull request so that we can keep our dependencies up to date and secure." **Issue:** "Please update the repository to include a Dependabot configuration file. This will ensure our dependencies remain updated and secure.Follow the guidelines in [creating Dependabot configuration files](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file) to set it up properly.Here's an example of the code:" | The body of the issue or pull request that will be created if dependabot could be enabled. |
-| `REPOS_JSON_LOCATION` | False    | "Create dependabot.yaml" | The commit message for the pull request that will be created if dependabot could be enabled. |
+| field                 | required | default                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | description                                                                                                                             |
+| --------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `GH_ENTERPRISE_URL`   | False    | ""                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | The `GH_ENTERPRISE_URL` is used to connect to an enterprise server instance of GitHub. github.com users should not enter anything here. |
+| `PR_TITLE`            | False    | "Enable Dependabot"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | The title of the issue or pull request that will be created if dependabot could be enabled.                                             |
+| `PR_BODY`             | False    | **Pull Request:** "Dependabot could be enabled for this repository. Please enable it by merging this pull request so that we can keep our dependencies up to date and secure." **Issue:** "Please update the repository to include a Dependabot configuration file. This will ensure our dependencies remain updated and secure.Follow the guidelines in [creating Dependabot configuration files](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file) to set it up properly.Here's an example of the code:" | The body of the issue or pull request that will be created if dependabot could be enabled.                                              |
+| `REPOS_JSON_LOCATION` | False    | "Create dependabot.yaml"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | The commit message for the pull request that will be created if dependabot could be enabled.                                            |
 
 ### Example workflow
 
@@ -86,24 +86,24 @@ jobs:
       pull-requests: write
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    
-    - name: Find OSS repository in organization
-      uses: docker://ghcr.io/zkoppert/innersource-crawler:v1
-      env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        ORGANIZATION: ${{ secrets.ORGANIZATION }}
-        TOPIC: open-source
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Open pull requests in OSS repository that are missing contrib files
-      uses: docker://ghcr.io/github/automatic-contrib-prs:v2
-      env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        ORGANIZATION: ${{ secrets.ORGANIZATION }}
-        GH_ACTOR: ${{ secrets.GH_ACTOR }}
-        PR_TITLE: ${{ secrets.PR_TITLE }}
-        PR_BODY: ${{ secrets.PR_BODY }}
+      - name: Find OSS repository in organization
+        uses: docker://ghcr.io/zkoppert/innersource-crawler:v1
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          ORGANIZATION: ${{ secrets.ORGANIZATION }}
+          TOPIC: open-source
+
+      - name: Open pull requests in OSS repository that are missing contrib files
+        uses: docker://ghcr.io/github/automatic-contrib-prs:v2
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          ORGANIZATION: ${{ secrets.ORGANIZATION }}
+          GH_ACTOR: ${{ secrets.GH_ACTOR }}
+          PR_TITLE: ${{ secrets.PR_TITLE }}
+          PR_BODY: ${{ secrets.PR_BODY }}
 ```
 
 ## Scaling for large organizations
