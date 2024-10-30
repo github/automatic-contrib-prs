@@ -17,21 +17,34 @@ if __name__ == "__main__":
     pr_title = env_vars.pr_title
     repos_json_location = env_vars.repos_json_location
     token = env_vars.gh_token
+    gh_app_id = env_vars.gh_app_id
+    gh_app_installation_id = env_vars.gh_app_installation_id
+    gh_app_private_key_bytes = env_vars.gh_app_private_key_bytes
+    ghe = env_vars.gh_enterprise_url
+    gh_app_enterprise_only = env_vars.gh_app_enterprise_only
 
     # Auth to GitHub.com
     github_connection = auth.auth_to_github(
-        env_vars.gh_app_id,
-        env_vars.gh_app_installation_id,
-        env_vars.gh_app_private_key_bytes,
-        env_vars.gh_enterprise_url,
         token,
+        gh_app_id,
+        gh_app_installation_id,
+        gh_app_private_key_bytes,
+        ghe,
+        gh_app_enterprise_only,
     )
 
+    if not token and gh_app_id and gh_app_installation_id and gh_app_private_key_bytes:
+        token = auth.get_github_app_installation_token(
+            ghe, gh_app_id, gh_app_private_key_bytes, gh_app_installation_id
+        )
+
+    endpoint = ghe if ghe else "github.com"
+
     os.system("git config --global user.name 'GitHub Actions'")
-    os.system("git config --global user.email 'no-reply@github.com'")
+    os.system(f"git config --global user.email 'no-reply@{endpoint}'")
 
     # Get innersource repos from organization
-    os.system(f"git clone https://{gh_actor}:{token}@github.com/{repos_json_location}")
+    os.system(f"git clone https://{gh_actor}:{token}@{endpoint}/{repos_json_location}")
     with open(str(repos_json_location), "r", encoding="utf-8") as repos_file:
         innersource_repos = json.loads(repos_file.read())
 
@@ -46,7 +59,7 @@ if __name__ == "__main__":
             repo_full_name = repo["full_name"]
             repo_name = repo["name"]
             os.system(
-                f"git clone https://{gh_actor}:{token}@github.com/{repo_full_name}"
+                f"git clone https://{gh_actor}:{token}@{endpoint}/{repo_full_name}"
             )
             # checkout a branch called contributing-doc
             BRANCH_NAME = "contributing-doc"
