@@ -38,7 +38,7 @@ if __name__ == "__main__":
             ghe, gh_app_id, gh_app_private_key_bytes, gh_app_installation_id
         )
 
-    endpoint = ghe if ghe else "github.com"
+    endpoint = ghe.removeprefix("https://") if ghe else "github.com"
 
     os.system("git config --global user.name 'GitHub Actions'")
     os.system(f"git config --global user.email 'no-reply@{endpoint}'")
