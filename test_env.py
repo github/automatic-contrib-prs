@@ -1,10 +1,12 @@
 """Test the get_env_vars function"""
 
 import os
+import random
+import string
 import unittest
 from unittest.mock import patch
 
-from env import EnvVars, get_env_vars
+from env import MAX_BODY_LENGTH, MAX_TITLE_LENGTH, EnvVars, get_env_vars
 
 BODY = "example CONTRIBUTING file contents"
 ORGANIZATION = "Organization01"
@@ -22,6 +24,7 @@ class TestEnv(unittest.TestCase):
             "GH_APP_ID",
             "GH_APP_INSTALLATION_ID",
             "GH_APP_PRIVATE_KEY",
+            "GITHUB_APP_ENTERPRISE_ONLY",
             "GH_ENTERPRISE_URL",
             "GH_TOKEN",
             "ORGANIZATION",
@@ -40,6 +43,7 @@ class TestEnv(unittest.TestCase):
             "GH_APP_ID": "",
             "GH_APP_INSTALLATION_ID": "",
             "GH_APP_PRIVATE_KEY": "",
+            "GITHUB_APP_ENTERPRISE_ONLY": "",
             "GH_ENTERPRISE_URL": "",
             "GH_TOKEN": TOKEN,
             "ORGANIZATION": ORGANIZATION,
@@ -54,6 +58,7 @@ class TestEnv(unittest.TestCase):
             None,
             None,
             b"",
+            False,
             "",
             TOKEN,
             ORGANIZATION,
@@ -71,6 +76,7 @@ class TestEnv(unittest.TestCase):
             "GH_APP_ID": "12345",
             "GH_APP_INSTALLATION_ID": "678910",
             "GH_APP_PRIVATE_KEY": "hello",
+            "GITHUB_APP_ENTERPRISE_ONLY": "",
             "GH_ENTERPRISE_URL": "",
             "GH_TOKEN": "",
             "ORGANIZATION": ORGANIZATION,
@@ -86,6 +92,7 @@ class TestEnv(unittest.TestCase):
             12345,
             678910,
             b"hello",
+            False,
             "",
             "",
             ORGANIZATION,
@@ -103,6 +110,7 @@ class TestEnv(unittest.TestCase):
             "GH_APP_ID": "",
             "GH_APP_INSTALLATION_ID": "",
             "GH_APP_PRIVATE_KEY": "",
+            "GITHUB_APP_ENTERPRISE_ONLY": "",
             "GH_ENTERPRISE_URL": "testghe",
             "GH_TOKEN": TOKEN,
             "ORGANIZATION": ORGANIZATION,
@@ -118,6 +126,7 @@ class TestEnv(unittest.TestCase):
             None,
             None,
             b"",
+            False,
             "testghe",
             TOKEN,
             ORGANIZATION,
@@ -153,6 +162,87 @@ class TestEnv(unittest.TestCase):
         self.assertEqual(
             str(the_exception),
             "ORGANIZATION environment variable not set",
+        )
+
+    @patch.dict(
+        os.environ,
+        {
+            "ORGANIZATION": "my_organization",
+            "GH_APP_ID": "12345",
+            "GH_APP_INSTALLATION_ID": "",
+            "GH_APP_PRIVATE_KEY": "",
+            "GH_TOKEN": "",
+        },
+        clear=True,
+    )
+    def test_get_env_vars_auth_with_github_app_installation_missing_inputs(self):
+        """Test that an error is raised when there are missing inputs for the gh app"""
+        with self.assertRaises(ValueError) as context_manager:
+            get_env_vars(True)
+        the_exception = context_manager.exception
+        self.assertEqual(
+            str(the_exception),
+            "GH_APP_ID set and GH_APP_INSTALLATION_ID or GH_APP_PRIVATE_KEY variable not set",
+        )
+
+    @patch.dict(
+        os.environ,
+        {
+            "ORGANIZATION": "",
+            "GH_TOKEN": "test",
+        },
+        clear=True,
+    )
+    def test_get_env_vars_no_organization_set(self):
+        """Test that an error is raised whenthere are missing inputs for the gh app"""
+        with self.assertRaises(ValueError) as context_manager:
+            get_env_vars(True)
+        the_exception = context_manager.exception
+        self.assertEqual(
+            str(the_exception),
+            "ORGANIZATION environment variable not set",
+        )
+
+    @patch.dict(
+        os.environ,
+        {
+            "ORGANIZATION": "my_organization",
+            "GH_TOKEN": "test",
+            "PR_TITLE": "".join(
+                random.choices(string.ascii_letters, k=MAX_TITLE_LENGTH + 1)
+            ),
+        },
+        clear=True,
+    )
+    def test_get_env_vars_pr_title_too_long(self):
+        """Test that an error is raised when the PR_TITLE env variable has more than MAX_TITLE_LENGTH characters"""
+        with self.assertRaises(ValueError) as context_manager:
+            get_env_vars(True)
+        the_exception = context_manager.exception
+        self.assertEqual(
+            str(the_exception),
+            f"PR_TITLE environment variable is too long. Max {MAX_TITLE_LENGTH} characters",
+        )
+
+    @patch.dict(
+        os.environ,
+        {
+            "ORGANIZATION": "my_organization",
+            "GH_TOKEN": "test",
+            "PR_BODY": "".join(
+                random.choices(string.ascii_letters, k=MAX_BODY_LENGTH + 1)
+            ),
+        },
+        clear=True,
+    )
+    def test_get_env_vars_pr_body_too_long(self):
+        """Test that an error is raised when the PR_BODY env variable has more than MAX_BODY_LENGTH characters"""
+        with self.assertRaises(ValueError) as context_manager:
+            get_env_vars(True)
+        the_exception = context_manager.exception
+        self.assertEqual(
+            str(the_exception),
+            f"BODY environment variable is too long. Max {MAX_BODY_LENGTH} characters",
         )
 
 
