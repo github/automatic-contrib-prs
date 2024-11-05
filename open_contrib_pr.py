@@ -154,7 +154,7 @@ def clone_repository(gh_actor, token, endpoint, repo):
     repo_name = repo["name"]
     try:
         os.system(f"git clone https://{gh_actor}:{token}@{endpoint}/{repo_full_name}")
-    except Exception as e:  # pylint: disable=broad-exception-caught
+    except OSError as e:
         print(f"Failed to clone repository: {e}")
         return None
     return repo_name

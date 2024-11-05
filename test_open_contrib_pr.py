@@ -65,7 +65,7 @@ class TestCloneRepository(unittest.TestCase):
         """
         Test the clone_repository function when the clone fails.
         """
-        mock_system.side_effect = Exception("Clone failed")  # Simulate clone failure
+        mock_system.side_effect = OSError("Clone failed")  # Simulate clone failure
 
         result = clone_repository(
             gh_actor="test_actor",
