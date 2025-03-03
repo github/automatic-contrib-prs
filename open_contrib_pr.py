@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-""" Automatically open a pull request for repositories that have no CONTRIBUTING.md file """
+"""Automatically open a pull request for repositories that have no CONTRIBUTING.md file"""
 
 import json
 import os
