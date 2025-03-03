@@ -1,4 +1,4 @@
-""" Tests for the open_contrib_pr.py functions. """
+"""Tests for the open_contrib_pr.py functions."""
 
 import unittest
 from unittest.mock import MagicMock, mock_open, patch
